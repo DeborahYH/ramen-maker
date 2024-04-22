@@ -23,10 +23,10 @@ lbl_welcome_text = customtkinter.CTkLabel(root, wraplength = 600, font=("Helveti
 lbl_welcome_text.pack(pady=10, padx=20)
 
 # Buttons give 2 options
-btn_login = customtkinter.CTkButton(root, text = "Login", command = "login")
+btn_login = customtkinter.CTkButton(root, font=("Helvetica", 16), text = "Login", command = "login")
 btn_login.pack(pady=15)
 
-btn_new_user = customtkinter.CTkButton(root, text = "New User", command = "create_user")
+btn_new_user = customtkinter.CTkButton(root, font=("Helvetica", 16), text = "New User", command = "create_user")
 btn_new_user.pack(pady=15)
 
 root.mainloop()

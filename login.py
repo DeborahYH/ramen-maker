@@ -25,7 +25,7 @@ entry_email.pack(pady=5)
 lbl_password = customtkinter.CTkLabel(root, text = "Password")
 lbl_password.pack(pady=5)
 
-entry_password = customtkinter.CTkEntry(root, placeholder_text = "*****")
+entry_password = customtkinter.CTkEntry(root, placeholder_text = "*****", show="*")
 entry_password.pack(pady=5)
 
 # Button allows the users to submit their information

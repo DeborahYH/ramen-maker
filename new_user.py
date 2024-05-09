@@ -1,6 +1,8 @@
 from tkinter import *
-import customtkinter
 from PIL import Image 
+import customtkinter
+import maskpass
+
 
 # Theme
 customtkinter.set_appearance_mode("light")
@@ -47,7 +49,7 @@ entry_email.pack(pady=10)
 
 lbl_password = customtkinter.CTkLabel(root, font=("Helvetica", 14), anchor="w", justify = "left", text = "Password")
 lbl_password.pack(pady=0)
-entry_password = customtkinter.CTkEntry(root, width=250, placeholder_text="")
+entry_password = customtkinter.CTkEntry(root, width=250, placeholder_text="Enter your password", show="*")
 entry_password.pack(pady=10)
 
 # Button to submit user information

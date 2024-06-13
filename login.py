@@ -45,7 +45,7 @@ logo = customtkinter.CTkImage(light_image = Image.open('images/logo.png'), dark_
 lbl_logo = customtkinter.CTkLabel(frame_top, image = logo)
 lbl_logo.pack(pady=20)
 
-# Fields where the users can insert their login information
+# Entry fields
 lbl_email = customtkinter.CTkLabel(frame_middle1A, font=("Helvetica", 15), text = "Email")
 lbl_email.pack(side="left", pady=0, padx=60)
 

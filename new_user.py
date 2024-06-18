@@ -76,9 +76,12 @@ lbl_welcome.pack(pady=15)
 lbl_new_user = customtkinter.CTkLabel(frame_top, font=("Helvetica", 20), text = "New User Registration")
 lbl_new_user.pack(pady=15)
 
+lbl_new_user = customtkinter.CTkLabel(frame_top, font=("Helvetica", 15), text = "Please fill out the following fields to complete your registration")
+lbl_new_user.pack(pady=0)
+
 # Entry fields
 lbl_name = customtkinter.CTkLabel(frame_middle2, font=("Helvetica", 15), anchor="w", justify="left", text = "Name")
-lbl_name.pack(pady=(10,0))
+lbl_name.pack(pady=(20,0))
 entry_name = customtkinter.CTkEntry(frame_middle2, width=230, placeholder_text="Insert your name here")
 entry_name.pack(pady=(0,15))
 
@@ -95,7 +98,7 @@ entry_phone = customtkinter.CTkEntry(frame_middle2, width=230, placeholder_text=
 entry_phone.pack(pady=(0,15))
 
 lbl_address = customtkinter.CTkLabel(frame_middle3, font=("Helvetica", 15), anchor="w", justify = "left", text = "Address")
-lbl_address.pack(pady=(10,0))
+lbl_address.pack(pady=(20,0))
 entry_address = customtkinter.CTkEntry(frame_middle3, width=230, placeholder_text="Street Address")
 entry_address.pack(pady=(0,15))
 

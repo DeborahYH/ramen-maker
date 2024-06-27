@@ -8,7 +8,7 @@ customtkinter.set_default_color_theme("blue")
 
 # Creates the main window
 root = customtkinter.CTk()
-root.geometry('1000x900')
+root.geometry('800x600')
 root.resizable(False,False)
 
 

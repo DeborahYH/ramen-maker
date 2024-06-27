@@ -12,7 +12,7 @@ customtkinter.set_default_color_theme("blue")
 
 # Creates the main window
 root = customtkinter.CTk()
-root.geometry('1000x850')
+root.geometry('800x600')
 
 # Layout
 frame_top = customtkinter.CTkFrame(root, fg_color="#B5F5FF")
@@ -125,10 +125,6 @@ def submit():
 logo = customtkinter.CTkImage(light_image = Image.open('images/logo.png'), dark_image = Image.open('images/logo.png'), size=(200,200))
 lbl_logo = customtkinter.CTkLabel(frame_top, image = logo)
 lbl_logo.pack(pady=10)
-
-# Shows the welcome text
-lbl_welcome = customtkinter.CTkLabel(frame_top, font=("Helvetica", 25), text = "Welcome!")
-lbl_welcome.pack(pady=15)
 
 lbl_new_user = customtkinter.CTkLabel(frame_top, font=("Helvetica", 20), text = "New User Registration")
 lbl_new_user.pack(pady=15)

@@ -1,6 +1,7 @@
 from tkinter import *
 from tkcalendar import *
 import customtkinter
+import sqlite3
 from PIL import Image
 import maskpass
 
@@ -13,6 +14,7 @@ customtkinter.set_default_color_theme("blue")
 root = customtkinter.CTk()
 root.geometry('1000x850')
 
+# Layout
 frame_top = customtkinter.CTkFrame(root, fg_color="#B5F5FF")
 frame_top.pack(side="top", fill="both", expand=True)
 frame_middle = customtkinter.CTkFrame(root, fg_color="#DD5FDA")
@@ -28,6 +30,29 @@ frame_middle3 = customtkinter.CTkFrame(frame_middle, fg_color="#B2AFBA")
 frame_middle3.pack(side="left", fill="both", expand=True)
 frame_middle4 = customtkinter.CTkFrame(frame_middle, fg_color="#B2AFBA")
 frame_middle4.pack(side="left", fill="both", expand=True)
+
+
+# Creates or connects to a database
+db = sqlite3.connect('app_records.db')
+
+# Creates a cursor
+cursor = db.cursor()
+
+# Creates a table with its columns
+cursor.execute("""CREATE TABLE IF NOT EXISTS user_info (
+               name text,
+               birth_date text,
+               phone_number text,
+               address text,
+               email text,
+               password text
+               )""")
+
+# Commits changes to the database
+# Closes the connection to the database
+db.commit()
+db.close()
+
 
 # Cleans the entry if there is a date and allows the user to select a different date
 def dob_action(event):
@@ -62,6 +87,38 @@ def pick_date(event):
 def obtain_date():
     entry_birth.insert(0, calendar.get_date())
     date_window.destroy()
+
+# Saves data inserted in the entry fields to the user_info table
+def submit():
+    
+    # Connects to the database
+    db = sqlite3.connect('app_records.db')
+
+    # Creates a cursor
+    cursor = db.cursor()    
+
+    # Inserts data into the table
+    cursor.execute("INSERT INTO user_info VALUES (:entry_name, :entry_birth, :entry_phone, :entry_address, :entry_email, :entry_password)",
+                   {'entry_name': entry_name.get(),
+                    'entry_birth': entry_birth.get(),
+                    'entry_phone': entry_phone.get(),
+                    'entry_address': entry_address.get(),
+                    'entry_email': entry_email.get(),
+                    'entry_password': entry_password.get()
+                   })
+
+    # Commits changes to the database
+    # Closes the connection to the database
+    db.commit()
+    db.close()
+
+    # Clears all entry boxes
+    entry_name.delete(0, END)
+    entry_birth.delete(0, END)
+    entry_phone.delete(0, END)
+    entry_address.delete(0, END)
+    entry_email.delete(0, END)
+    entry_password.delete(0, END)
 
 
 # Adds the logo
@@ -113,7 +170,32 @@ entry_password = customtkinter.CTkEntry(frame_middle3, width=230, placeholder_te
 entry_password.pack(pady=(0,15))
 
 # Button to submit user information
-btn_submit = customtkinter.CTkButton(frame_bottom, width=100, height=30, fg_color="#D83215", hover_color="#ED5A41", font=("Helvetica", 15), text = "Create New User", command = "submit")
+btn_submit = customtkinter.CTkButton(frame_bottom, width=100, height=30, fg_color="#D83215", hover_color="#ED5A41", font=("Helvetica", 15), text = "Create New User", command = submit)
 btn_submit.pack(pady=20)
+
+# Creates a button and function to show the user records in the table
+"""
+def show():
+    
+    # Creates or connects to a database
+    db = sqlite3.connect('app_records.db')
+
+    # Creates a cursor
+    cursor = db.cursor()    
+
+    # Inserts data into the table
+    cursor.execute("SELECT *, oid FROM user_info")
+    records = cursor.fetchall()
+    print(records)
+
+    # Commits changes to the database
+    db.commit()
+
+    # Closes the connection to the database
+    db.close()
+    
+btn_query = customtkinter.CTkButton(frame_bottom, width=100, height=30, fg_color="#D83215", hover_color="#ED5A41", font=("Helvetica", 15), text = "Show", command = show)
+btn_query.pack(pady=20)
+"""
 
 root.mainloop()

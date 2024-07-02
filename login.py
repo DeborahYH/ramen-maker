@@ -1,5 +1,7 @@
 from tkinter import *
+from CTkMessagebox import CTkMessagebox
 import customtkinter
+import sqlite3
 from PIL import Image 
 
 # Theme
@@ -19,6 +21,27 @@ def password_view():
     else: 
         btn_eye.configure(image=img_show)
         entry_password.configure(show='*')
+
+def login():
+
+    global entry_email, entry_password
+
+    # Creates or connects to a database
+    db = sqlite3.connect('app_records.db')
+
+    # Creates a cursor
+    cursor = db.cursor()   
+
+    email = entry_email.get()
+    entry_password = entry_password.get()
+
+    cursor.execute("SELECT password FROM user_info WHERE email=?", [email])
+    result = cursor.fetchone()
+
+    if result:
+        CTkMessagebox(width=70, fg_color="#DBDBDB", title="Login Check", message="Success!", icon="check", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+    else:
+        CTkMessagebox(width=70, fg_color="#DBDBDB", title="Login Check", message="User Not Found!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
 
 frame_t = customtkinter.CTkFrame(root)
 frame_t.pack(side="top", fill="both", expand=True)
@@ -51,7 +74,7 @@ btn_eye = customtkinter.CTkButton(frame_m, width=8, fg_color="#DBDBDB", image=im
 btn_eye.place(relx = 0.7, rely = 0.65)
 
 # Button allows the users to submit their information
-btn_submit = customtkinter.CTkButton(frame_b, fg_color="#D83215", hover_color="#ED5A41", width=100, height=30, font=("Helvetica", 15), text="Submit")
-btn_submit.place(relx = 0.5, rely = 0.2, anchor = 'center')
+btn_login = customtkinter.CTkButton(frame_b, fg_color="#D83215", hover_color="#ED5A41", width=100, height=30, font=("Helvetica", 15), text="Login", command = login)
+btn_login.place(relx = 0.5, rely = 0.2, anchor = 'center')
 
 root.mainloop()

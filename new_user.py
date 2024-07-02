@@ -15,21 +15,21 @@ root = customtkinter.CTk()
 root.geometry('800x600')
 
 # Layout
-frame_top = customtkinter.CTkFrame(root, fg_color="#B5F5FF")
-frame_top.pack(side="top", fill="both", expand=True)
-frame_middle = customtkinter.CTkFrame(root, fg_color="#DD5FDA")
-frame_middle.pack(side="top", fill="both", expand=True)
-frame_bottom = customtkinter.CTkFrame(root, fg_color="#FFCAEB")
-frame_bottom.pack(side="top", fill="both", expand=True)
+frame_t = customtkinter.CTkFrame(root)
+frame_t.pack(side="top", fill="both", expand=True)
+frame_m = customtkinter.CTkFrame(root)
+frame_m.pack(side="top", fill="both", expand=True)
+frame_b = customtkinter.CTkFrame(root)
+frame_b.pack(side="top", fill="both", expand=True)
 
-frame_middle1 = customtkinter.CTkFrame(frame_middle, fg_color="#B2AFBA")
-frame_middle1.pack(side="left", fill="both", expand=True)
-frame_middle2 = customtkinter.CTkFrame(frame_middle, fg_color="#B2AFBA")
-frame_middle2.pack(side="left", fill="both", expand=True)
-frame_middle3 = customtkinter.CTkFrame(frame_middle, fg_color="#B2AFBA")
-frame_middle3.pack(side="left", fill="both", expand=True)
-frame_middle4 = customtkinter.CTkFrame(frame_middle, fg_color="#B2AFBA")
-frame_middle4.pack(side="left", fill="both", expand=True)
+frame_m1 = customtkinter.CTkFrame(frame_m, fg_color="#DBDBDB")
+frame_m1.pack(side="left", fill="both", expand=True)
+frame_m2 = customtkinter.CTkFrame(frame_m, fg_color="#DBDBDB")
+frame_m2.pack(side="left", fill="both", expand=True)
+frame_m3 = customtkinter.CTkFrame(frame_m, fg_color="#DBDBDB")
+frame_m3.pack(side="left", fill="both", expand=True)
+frame_m4 = customtkinter.CTkFrame(frame_m, fg_color="#DBDBDB")
+frame_m4.pack(side="left", fill="both", expand=True)
 
 
 # Creates or connects to a database
@@ -123,51 +123,51 @@ def submit():
 
 # Adds the logo
 logo = customtkinter.CTkImage(light_image = Image.open('images/logo.png'), dark_image = Image.open('images/logo.png'), size=(200,200))
-lbl_logo = customtkinter.CTkLabel(frame_top, image = logo)
+lbl_logo = customtkinter.CTkLabel(frame_t, text = "", image = logo)
 lbl_logo.pack(pady=10)
 
-lbl_new_user = customtkinter.CTkLabel(frame_top, font=("Helvetica", 20), text = "New User Registration")
-lbl_new_user.pack(pady=15)
-
-lbl_new_user = customtkinter.CTkLabel(frame_top, font=("Helvetica", 15), text = "Please fill out the following fields to complete your registration")
+lbl_new_user = customtkinter.CTkLabel(frame_t, font=("Helvetica", 20), text = "New User Registration")
 lbl_new_user.pack(pady=0)
 
+lbl_new_user = customtkinter.CTkLabel(frame_t, font=("Helvetica", 15), text = "Please fill out the following fields to complete your registration")
+lbl_new_user.pack(pady=(0,5))
+
 # Entry fields
-lbl_name = customtkinter.CTkLabel(frame_middle2, font=("Helvetica", 15), anchor="w", justify="left", text = "Name")
-lbl_name.pack(pady=(20,0))
-entry_name = customtkinter.CTkEntry(frame_middle2, width=230, placeholder_text="Insert your name here")
-entry_name.pack(pady=(0,15))
+lbl_name = customtkinter.CTkLabel(frame_m2, font=("Helvetica", 15), anchor="e", justify="left", text = "Name")
+lbl_name.pack(pady=(10,0))
+entry_name = customtkinter.CTkEntry(frame_m2, width=180, placeholder_text="Insert your name here")
+entry_name.pack(pady=(0,15), padx=5)
 
 # Binds dob_action() to the entry field to decide whether it must be cleaned before choosng a date
-lbl_birth = customtkinter.CTkLabel(frame_middle2, font=("Helvetica", 15), anchor="w", justify = "left", text = "Birth Date")
+lbl_birth = customtkinter.CTkLabel(frame_m2, font=("Helvetica", 15), anchor="e", justify = "left", text = "Birth Date")
 lbl_birth.pack(pady=(10,0))
-entry_birth = customtkinter.CTkEntry(frame_middle2, width=230, placeholder_text="mm/dd/yyyy")
-entry_birth.pack(pady=(0,15))
+entry_birth = customtkinter.CTkEntry(frame_m2, width=180, placeholder_text="mm/dd/yyyy")
+entry_birth.pack(pady=(0,15), padx=5)
 entry_birth.bind("<1>", dob_action)
 
-lbl_phone = customtkinter.CTkLabel(frame_middle2, font=("Helvetica", 15), anchor="w", justify = "left", text = "Phone")
+lbl_phone = customtkinter.CTkLabel(frame_m2, font=("Helvetica", 15), anchor="e", justify = "left", text = "Phone")
 lbl_phone.pack(pady=(10,0))
-entry_phone = customtkinter.CTkEntry(frame_middle2, width=230, placeholder_text="")
-entry_phone.pack(pady=(0,15))
+entry_phone = customtkinter.CTkEntry(frame_m2, width=180, placeholder_text="")
+entry_phone.pack(pady=(0,15), padx=5)
 
-lbl_address = customtkinter.CTkLabel(frame_middle3, font=("Helvetica", 15), anchor="w", justify = "left", text = "Address")
-lbl_address.pack(pady=(20,0))
-entry_address = customtkinter.CTkEntry(frame_middle3, width=230, placeholder_text="Street Address")
-entry_address.pack(pady=(0,15))
+lbl_address = customtkinter.CTkLabel(frame_m3, font=("Helvetica", 15), anchor="e", justify = "left", text = "Address")
+lbl_address.pack(pady=(10,0))
+entry_address = customtkinter.CTkEntry(frame_m3, width=180, placeholder_text="Street Address")
+entry_address.pack(pady=(0,15), padx=5)
 
-lbl_email = customtkinter.CTkLabel(frame_middle3, font=("Helvetica", 15), anchor="w", justify = "left", text = "Email")
+lbl_email = customtkinter.CTkLabel(frame_m3, font=("Helvetica", 15), anchor="w", justify = "left", text = "Email")
 lbl_email.pack(pady=(10,0))
-entry_email = customtkinter.CTkEntry(frame_middle3, width=230, placeholder_text="example@domain.com")
-entry_email.pack(pady=(0,15))
+entry_email = customtkinter.CTkEntry(frame_m3, width=180, placeholder_text="example@domain.com")
+entry_email.pack(pady=(0,15), padx=5)
 
-lbl_password = customtkinter.CTkLabel(frame_middle3, font=("Helvetica", 15), anchor="w", justify = "left", text = "Password")
+lbl_password = customtkinter.CTkLabel(frame_m3, font=("Helvetica", 15), anchor="w", justify = "left", text = "Password")
 lbl_password.pack(pady=(10,0))
-entry_password = customtkinter.CTkEntry(frame_middle3, width=230, placeholder_text="Enter your password", show="*")
-entry_password.pack(pady=(0,15))
+entry_password = customtkinter.CTkEntry(frame_m3, width=180, placeholder_text="Enter your password", show="*")
+entry_password.pack(pady=(0,15), padx=5)
 
 # Button to submit user information
-btn_submit = customtkinter.CTkButton(frame_bottom, width=100, height=30, fg_color="#D83215", hover_color="#ED5A41", font=("Helvetica", 15), text = "Create New User", command = submit)
-btn_submit.pack(pady=20)
+btn_submit = customtkinter.CTkButton(frame_b, width=100, height=30, fg_color="#D83215", hover_color="#ED5A41", font=("Helvetica", 15), text = "Create New User", command = submit)
+btn_submit.pack(pady=10)
 
 # Creates a button and function to show the user records in the table
 """

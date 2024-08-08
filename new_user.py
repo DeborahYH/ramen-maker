@@ -1,7 +1,9 @@
 from tkinter import *
 from tkcalendar import *
 import customtkinter
+from CTkMessagebox import CTkMessagebox
 import sqlite3
+import re
 from PIL import Image
 import maskpass
 
@@ -88,6 +90,28 @@ def obtain_date():
     entry_birth.insert(0, calendar.get_date())
     date_window.destroy()
 
+# Creates a pattern to be compared to the target string
+pattern = re.compile(r'')
+
+# Checks if the password is strong
+def check_password(event):
+    password = entry_password.get()
+    while True:
+        if len(password) < 8:
+            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Login Check", message="Password must be at least 8 characters long", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+            break
+        elif re.search(r'[!@#$%&]', password) is None:
+            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Login Check", message="Password must have at least 1 special character", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+            break
+        elif re.search(r'\d', password) is None:
+            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Login Check", message="Password must have at least 1 number between 0-9", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+            break
+        elif re.search(r'[A-Z]', password) is None:
+            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Login Check", message="Password must have at least 1 uppercase letter", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+            break
+        else: 
+            break
+
 # Saves data inserted in the entry fields to the user_info table
 def submit():
     
@@ -164,6 +188,7 @@ lbl_password = customtkinter.CTkLabel(frame_m3, font=("Helvetica", 15), anchor="
 lbl_password.pack(pady=(10,0))
 entry_password = customtkinter.CTkEntry(frame_m3, width=180, placeholder_text="Enter your password", show="*")
 entry_password.pack(pady=(0,15), padx=5)
+entry_password.bind("<FocusOut>", check_password)
 
 # Button to submit user information
 btn_submit = customtkinter.CTkButton(frame_b, width=100, height=30, fg_color="#D83215", hover_color="#ED5A41", font=("Helvetica", 15), text = "Create New User", command = submit)

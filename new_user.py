@@ -90,6 +90,22 @@ def obtain_date():
     entry_birth.insert(0, calendar.get_date())
     date_window.destroy()
 
+
+# Checks if the email is valid
+def check_email(event):
+
+    # Creates a pattern to be compared to the target string
+    pattern = re.compile("^[a-z 0-9]+[._]?[a-z 0-9]+[@][a-zA-Z0-9]+\.[a-zA-Z]{2,3}$")
+    
+
+    email = entry_email.get()
+
+    match = pattern.match(email) 
+    
+    if not match:
+        CTkMessagebox(width=100, fg_color="#DBDBDB", title="Error!", message="Email is not valid!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+
+
 # Creates a pattern to be compared to the target string
 pattern = re.compile(r'')
 
@@ -183,6 +199,7 @@ lbl_email = customtkinter.CTkLabel(frame_m3, font=("Helvetica", 15), anchor="w",
 lbl_email.pack(pady=(10,0))
 entry_email = customtkinter.CTkEntry(frame_m3, width=180, placeholder_text="example@domain.com")
 entry_email.pack(pady=(0,15), padx=5)
+entry_email.bind("<FocusOut>", check_email)
 
 lbl_password = customtkinter.CTkLabel(frame_m3, font=("Helvetica", 15), anchor="w", justify = "left", text = "Password")
 lbl_password.pack(pady=(10,0))

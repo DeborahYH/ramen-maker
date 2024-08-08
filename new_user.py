@@ -96,34 +96,30 @@ def check_email(event):
 
     # Creates a pattern to be compared to the target string
     pattern = re.compile("^[a-z 0-9]+[._]?[a-z 0-9]+[@][a-zA-Z0-9]+\.[a-zA-Z]{2,3}$")
-    
-
+  
+    # Compares the pattern to the email inserted by the user 
     email = entry_email.get()
-
     match = pattern.match(email) 
     
     if not match:
         CTkMessagebox(width=100, fg_color="#DBDBDB", title="Error!", message="Email is not valid!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
 
 
-# Creates a pattern to be compared to the target string
-pattern = re.compile(r'')
-
-# Checks if the password is strong
+# Checks if the password is strong based on 4 requirements
 def check_password(event):
     password = entry_password.get()
     while True:
         if len(password) < 8:
-            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Login Check", message="Password must be at least 8 characters long", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="Password must be at least 8 characters long", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
             break
         elif re.search(r'[!@#$%&]', password) is None:
-            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Login Check", message="Password must have at least 1 special character", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="Password must have at least 1 special character", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
             break
-        elif re.search(r'\d', password) is None:
-            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Login Check", message="Password must have at least 1 number between 0-9", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+        elif re.search(r'[0-9]', password) is None:
+            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="Password must have at least 1 number between 0-9", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
             break
         elif re.search(r'[A-Z]', password) is None:
-            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Login Check", message="Password must have at least 1 uppercase letter", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="Password must have at least 1 uppercase letter", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
             break
         else: 
             break

@@ -25,6 +25,11 @@ It will later include the payment options and a delivery option which calculates
 
 ## 3. Screenshots
 
+<p align="center">
+  <img src="./images-gh/main.png.png" />
+</p>
+
+
 ![Welcome Screen](./images-gh/main.png)
 *Main screen where the user may choose to login or register to the application.* 
 

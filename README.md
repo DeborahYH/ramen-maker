@@ -25,21 +25,16 @@ It will later include the payment options and a delivery option which calculates
 
 ## 3. Screenshots
 
-<p align="center">
-  <img src="./images-gh/main.png.png" />
-</p>
-
-
-![Welcome Screen](./images-gh/main.png)
+![Welcome Screen](./images-gh/main.png)<br>
 *Main screen where the user may choose to login or register to the application.* 
 
-![User Registration](./images-gh/new-user.png)
+![User Registration](./images-gh/new-user.png)<br>
 *User registration screen which takes the user data and saves it to a database*
 
-![Login Screen](./images-gh/login.png)
+![Login Screen](./images-gh/login.png)<br>
 *Login screen which checks if the user is already registered in the application's database*
 
-![Menu Tabs](./images-gh/tabs.png)
+![Menu Tabs](./images-gh/tabs.png)<br>
 *Tabs through which the user can navigate and select the items to be purchased*
 
 ## 4. To-Do List

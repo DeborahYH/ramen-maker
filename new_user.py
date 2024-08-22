@@ -133,13 +133,22 @@ def submit():
     # Creates a cursor
     cursor = db.cursor()    
 
-    # Checks if the email is already registered
-    email = entry_email.get()
+    # Obtains the current value in all fields inserted by the user
+    name = entry_name.get().strip()
+    birth_date = entry_birth.get().strip()
+    phone_number = entry_phone.get().strip()
+    address = entry_address.get().strip()
+    email = entry_email.get().strip()
+    password = entry_password.get().strip()
 
-    if email != "":
-        cursor.execute("SELECT email from user_info WHERE email = ?", [email])
-        if cursor.fetchone is not None:
-            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="Email is already registered!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+    # Checks if the user didn't fill one of the entry fields
+    if not name or not birth_date or not phone_number or not address or not email or not password:
+            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="All fields must be filled!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+
+    # Checks if the email is already registered
+    cursor.execute("SELECT email from user_info WHERE email = ?", [email])
+    if cursor.fetchone() is not None:
+        CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="Email is already registered!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
      
     # Inserts data into the table
     cursor.execute("INSERT INTO user_info VALUES (:entry_name, :entry_birth, :entry_phone, :entry_address, :entry_email, :entry_password)",

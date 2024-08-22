@@ -143,12 +143,14 @@ def submit():
 
     # Checks if the user didn't fill one of the entry fields
     if not name or not birth_date or not phone_number or not address or not email or not password:
-            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="All fields must be filled!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+        CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="All fields must be filled!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+        return  # Exits the function
 
     # Checks if the email is already registered
     cursor.execute("SELECT email from user_info WHERE email = ?", [email])
     if cursor.fetchone() is not None:
         CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="Email is already registered!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+        return  # Exits the function
      
     # Inserts data into the table
     cursor.execute("INSERT INTO user_info VALUES (:entry_name, :entry_birth, :entry_phone, :entry_address, :entry_email, :entry_password)",

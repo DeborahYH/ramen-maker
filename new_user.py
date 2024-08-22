@@ -103,7 +103,7 @@ def check_email(event):
     
     if not match:
         CTkMessagebox(width=100, fg_color="#DBDBDB", title="Error!", message="Email is not valid!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
-
+        
 
 # Checks if the password is strong based on 4 requirements
 def check_password(event):
@@ -133,6 +133,14 @@ def submit():
     # Creates a cursor
     cursor = db.cursor()    
 
+    # Checks if the email is already registered
+    email = entry_email.get()
+
+    if email != "":
+        cursor.execute("SELECT email from user_info WHERE email = ?", [email])
+        if cursor.fetchone is not None:
+            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="Email is already registered!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+     
     # Inserts data into the table
     cursor.execute("INSERT INTO user_info VALUES (:entry_name, :entry_birth, :entry_phone, :entry_address, :entry_email, :entry_password)",
                    {'entry_name': entry_name.get(),

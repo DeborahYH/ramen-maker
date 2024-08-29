@@ -24,7 +24,7 @@ def password_view():
 
 def login():
 
-    global entry_email, entry_password
+    #global entry_email, entry_password
 
     # Creates or connects to a database
     db = sqlite3.connect('app_records.db')
@@ -32,16 +32,30 @@ def login():
     # Creates a cursor
     cursor = db.cursor()   
 
-    email = entry_email.get()
-    entry_password = entry_password.get()
+    # Obtains the current value inserted by the user into these two fields 
+    email = entry_email.get().strip()
+    password = entry_password.get().strip()
 
+    # Checks if the user didn't fill one of the entry fields
+    if not email or not password:
+        CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="All fields must be filled!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+        return  # Exits the function
+    
+    # Obtains the password from the record containing the user's email 
     cursor.execute("SELECT password FROM user_info WHERE email=?", [email])
     result = cursor.fetchone()
 
+    # Extract the password from the fetched record
+    # Checks if the registered password is the same as the one entered by the user
     if result:
-        CTkMessagebox(width=70, fg_color="#DBDBDB", title="Login Check", message="Success!", icon="check", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+        stored_password = result[0]  
+        if password == stored_password:
+            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Success", message="Login Sucessful!", icon="check", justify="center", button_color="#4CAF50", font=("Helvetica", 15))
+        else:
+            CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="Incorrect password!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
     else:
-        CTkMessagebox(width=70, fg_color="#DBDBDB", title="Login Check", message="User Not Found!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+        CTkMessagebox(width=100, fg_color="#DBDBDB", title="Warning!", message="Email not found!", icon="cancel", justify="center", button_color="#ED5A41", font=("Helvetica", 15))
+        
 
 frame_t = customtkinter.CTkFrame(root)
 frame_t.pack(side="top", fill="both", expand=True)

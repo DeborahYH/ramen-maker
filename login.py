@@ -24,8 +24,6 @@ def password_view():
 
 def login():
 
-    #global entry_email, entry_password
-
     # Creates or connects to a database
     db = sqlite3.connect('app_records.db')
 

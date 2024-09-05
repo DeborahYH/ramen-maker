@@ -15,7 +15,7 @@ root.resizable(False,False)
 # Creates tabs
 custom_font = customtkinter.CTkFont("Helvetica", 15, "bold")
 
-tabs = customtkinter.CTkTabview(root, width=530, height=300, fg_color="white", segmented_button_fg_color="#BEA69F", segmented_button_unselected_color="#BEA69F", segmented_button_selected_color="#9D796F", segmented_button_selected_hover_color="#D8CAC6", segmented_button_unselected_hover_color="#D8CAC6", text_color="#1F1817")
+tabs = customtkinter.CTkTabview(root, width=530, height=330, fg_color="white", segmented_button_fg_color="#BEA69F", segmented_button_unselected_color="#BEA69F", segmented_button_selected_color="#9D796F", segmented_button_selected_hover_color="#D8CAC6", segmented_button_unselected_hover_color="#D8CAC6", text_color="#1F1817")
 tabs._segmented_button.configure(font=custom_font)
 tabs.pack(pady=50)
 
@@ -38,6 +38,27 @@ frame_t1.pack(side="left", fill="both", expand=True)
 frame_t2 = customtkinter.CTkFrame(frame_t, fg_color="#F2ECE6")
 frame_t2.pack(side="left", fill="both", expand=True)
 
+# Allows the user to select the desired level of spiciness
+def slide(value):
+
+    # Dictionary relating the slider's integer values to their string values
+    level = {0: 'No Spice',
+             1: 'Light', 
+             2: 'Moderate', 
+             3: 'Spicy', 
+             4: "Extra Spicy"}    
+    
+    # Obtains the int value selected in the slider
+    value = slider_spice.get()
+
+    # Obtains the string associated with the selected value
+    if value in level:
+            spice_level = level[value]
+
+    # Label shows the spiciness level selected
+    lbl_spice_lvl.configure(text=spice_level)
+
+    
 lbl_size = customtkinter.CTkLabel(frame_t1, font=("Helvetica", 15, "bold", "underline"), text="Size")
 lbl_size.pack(pady=5)
 
@@ -64,12 +85,16 @@ radio_curry.pack(fill="x", padx=(70,0))
 radio_vegetarian = customtkinter.CTkRadioButton(frame_t2, radiobutton_width=15, radiobutton_height=15, border_width_unchecked=2, border_width_checked=3,font=("Helvetica", 15), text="Vegetarian ($5)")
 radio_vegetarian.pack(fill="x", padx=(70,0))
 
-slider_spice = customtkinter.CTkSlider(frame_b, from_ = 1, to = 5, number_of_steps = 5)
-slider_spice.set(0)
-slider_spice.pack(pady=(10,0))
-
 lbl_spice = customtkinter.CTkLabel(frame_b, font=("Helvetica", 15), text="Spiciness Level")
-lbl_spice.pack()
+lbl_spice.pack(pady=(5,0))
+
+slider_spice = customtkinter.CTkSlider(frame_b, from_ = 0, to = 4, number_of_steps = 4, button_color="#7A584E", button_hover_color="#7A584E", command=slide)
+slider_spice.set(0)
+slider_spice.pack()
+
+lbl_spice_lvl = customtkinter.CTkLabel(frame_b, font=("Helvetica", 15), text="No Spice")
+lbl_spice_lvl.pack()
+
 
 
 # Tab 2

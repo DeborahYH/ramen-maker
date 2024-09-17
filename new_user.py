@@ -95,8 +95,7 @@ def obtain_date():
 def check_email(event):
 
     # Creates a pattern to be compared to the target string
-    pattern = re.compile("^[a-z 0-9]+[._]?[a-z 0-9]+[@][a-zA-Z0-9]+\.[a-zA-Z]{2,3}$")
-  
+    pattern = re.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
     # Compares the pattern to the email inserted by the user 
     email = entry_email.get()
     match = pattern.match(email) 
